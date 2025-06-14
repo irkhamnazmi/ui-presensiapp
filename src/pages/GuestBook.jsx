@@ -42,59 +42,31 @@ const guests = [
   },
 ];
 
-export default function Dashboard() {
+export default function GuestBook() {
   return (
     <div className="px-4 pt-16 pb-32">
       <div className="flex text-2xl font-bold text-slate-900 mb-4">
-        <h1>Dashboard</h1>
+        <h1>Buku Tamu</h1>
       </div>
-      <div className="flex flex-col gap-4">
-        <div className="flex justify-between items-center ">
-          <h1 className="text-lg font-bold text-slate-900">Tema Terbaru</h1>
-          <a
-            href="http://"
-            className="flex text-sky-500 font-mediumhover:underline items-center"
-          >
-            Explore <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-        <Carousel className="w-full">
-          <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index}>
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-4xl font-semibold">
-                        {index + 1}
-                      </span>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-      </div>
+
       <div className="flex flex-col gap-4 mt-4">
         <div className="flex justify-between items-center ">
-          <h1 className="text-lg font-bold text-slate-900">Overview</h1>
+          <h1 className="text-lg font-bold text-slate-900">Daftar Undangan</h1>
         </div>
 
-        <Card className="w-full max-w-sm">
-          <CardContent className="p-6">
-            <p className="text-sm font-medium text-gray-800">
-              Fulan dan Fulana
-            </p>
-            <p className="text-3xl font-bold text-gray-900 mt-1">45,231.89</p>
-            <p className="text-sm text-gray-500 mt-1">4 menit yang lalu</p>
-          </CardContent>
+        <Card className="w-full">
+          <CardHeader className="px-4 py-2 gap-0">
+            <CardTitle className="text-md">Fulan dan Fulana</CardTitle>
+            <CardDescription className="text-sm font-medium">
+              7/06/2025
+            </CardDescription>
+          </CardHeader>
         </Card>
 
         <Card className="rounded-xl max-sm">
           <CardHeader>
-            <CardTitle className="text-base">Kehadiran</CardTitle>
-            <CardDescription>Daftar yang akan hadir</CardDescription>
+            <CardTitle className="text-base">RSV</CardTitle>
+            <CardDescription>Tanggapan dari netizen</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {guests.map((guest, idx) => (

@@ -1,3 +1,11 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { Bell } from "lucide-react";
 import React from "react";
@@ -20,13 +28,25 @@ export default function Navbar() {
           </button>
 
           {/* Avatar */}
-          <Avatar>
-            <AvatarImage
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover"
-              src="https://github.com/shadcn.png"
-              alt="@shadcn"
-            />
-          </Avatar>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar>
+                <AvatarImage
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover"
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                />
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56" align="end">
+              <DropdownMenuLabel>Anomale</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-red-600">
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </nav>
