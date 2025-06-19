@@ -13,6 +13,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { ArrowRight } from "lucide-react";
 import React from "react";
+import { Link } from "wouter";
 
 const guests = [
   {
@@ -51,12 +52,12 @@ export default function Dashboard() {
       <div className="flex flex-col gap-4">
         <div className="flex justify-between items-center ">
           <h1 className="text-lg font-bold text-slate-900">Tema Terbaru</h1>
-          <a
-            href="http://"
+          <Link
+            href="/undangan/tema"
             className="flex text-sky-500 font-mediumhover:underline items-center"
           >
             Explore <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
         <Carousel className="w-full">
           <CarouselContent>

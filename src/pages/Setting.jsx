@@ -54,7 +54,6 @@ export default function Setting() {
             type="text"
             id="domain"
             className="text-sm"
-            value="skoci.com"
             placeholder="skoci.com"
             required
           />
