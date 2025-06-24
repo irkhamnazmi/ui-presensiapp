@@ -8,6 +8,8 @@ import { Route, Switch, useLocation } from "wouter";
 import Theme from "./pages/Theme";
 import DetailTheme from "./pages/DetailTheme";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const hiddenNavRoutes = ["/login", "/register", "/forgot-password"];
 const hiddenBottomRoutes = [
@@ -28,6 +30,8 @@ function App() {
       {shouldShowNav && <Navbar />}
       <Switch>
         <Route path="/" component={Dashboard} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
         <Route path="/undangan" component={Invitation} />
         <Route path="/bukutamu" component={GuestBook} />
         <Route path="/seting" component={Setting} />
