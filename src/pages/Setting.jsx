@@ -27,7 +27,7 @@ import React from "react";
 
 export default function Setting() {
   return (
-    <div className="px-4 pt-16 pb-32">
+    <section className="px-4 pt-16 pb-32 md:max-w-7xl mx-auto xl:px-0">
       <div className="flex text-2xl font-bold text-slate-900 mb-4">
         <h1>Setting</h1>
       </div>
@@ -59,6 +59,6 @@ export default function Setting() {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

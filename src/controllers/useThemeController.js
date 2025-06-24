@@ -10,7 +10,7 @@ export const useThemeController = () => {
     try {
       setLoading(true);
       const data = await fetchTheme();
-  console.log(data);
+      // console.log(data);
 
       setThemes(data);
     } catch (err) {

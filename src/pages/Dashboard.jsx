@@ -45,8 +45,8 @@ const guests = [
 
 export default function Dashboard() {
   return (
-    <div className="px-4 pt-16 pb-32">
-      <div className="flex text-2xl font-bold text-slate-900 mb-4">
+    <section className="px-4 pt-16 pb-32 xl:max-w-7xl mx-auto xl:px-0">
+      <div className="text-2xl font-bold text-slate-900 mb-4">
         <h1>Dashboard</h1>
       </div>
       <div className="flex flex-col gap-4">
@@ -54,12 +54,11 @@ export default function Dashboard() {
           <h1 className="text-lg font-bold text-slate-900">Tema Terbaru</h1>
           <Link
             href="/undangan/tema"
-            className="flex text-sky-500 font-mediumhover:underline items-center"
-          >
+            className="flex text-sky-500 font-mediumhover:underline items-center">
             Explore <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        <Carousel className="w-full">
+        <Carousel className="w-full md:max-w-xl md:mx-auto">
           <CarouselContent>
             {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index}>
@@ -82,7 +81,7 @@ export default function Dashboard() {
           <h1 className="text-lg font-bold text-slate-900">Overview</h1>
         </div>
 
-        <Card className="w-full max-w-sm">
+        <Card className="w-full">
           <CardContent className="p-6">
             <p className="text-sm font-medium text-gray-800">
               Fulan dan Fulana
@@ -126,6 +125,6 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </section>
   );
 }

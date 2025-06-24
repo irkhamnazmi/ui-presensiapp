@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import React, { useState } from "react";
+import { Link } from "wouter";
 
 export default function Invitation() {
   const [active, setActive] = useState("Semua");
@@ -19,7 +20,7 @@ export default function Invitation() {
   ];
 
   return (
-    <div className="px-4 pt-16 pb-32">
+    <section className="px-4 pt-16 pb-32 xl:max-w-7xl xl:px-0 mx-auto">
       <div className="flex mb-4 text-2xl font-bold text-slate-900">
         <h1>Undangan</h1>
       </div>
@@ -34,19 +35,20 @@ export default function Invitation() {
               className=""
               key={tab}
               variant={active === tab ? "default" : "outline"}
-              onClick={() => setActive(tab)}
-            >
+              onClick={() => setActive(tab)}>
               {tab}
             </Button>
           ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          {images.map((src, index) => (
-            <Card key={index} className="overflow-hidden rounded-xl">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {images.map((img, index) => (
+            <Card
+              key={index}
+              className="overflow-hidden rounded-xl md:max-w-sm">
               <CardContent className="p-0">
                 <img
-                  src={src}
+                  src={img}
                   alt={`Photo ${index + 1}`}
                   className="w-full h-auto object-cover rounded-xl"
                 />
@@ -72,6 +74,6 @@ export default function Invitation() {
           </Card>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
