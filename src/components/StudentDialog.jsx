@@ -10,89 +10,109 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 import axios from "axios";
 
 export default function StudentDialog({
   open,
   onOpenChange,
-  mode = "add", // "add" | "edit"
-  student = {}, // data siswa saat edit
-  onSuccess, // callback refresh tabel
+  mode = "add",
+  student = {},
+  onSuccess,
 }) {
   const [form, setForm] = useState({ name: "", class: "" });
+  const [loading, setLoading] = useState(false);
   const isEdit = mode === "edit";
 
-  // Prefill saat edit
   useEffect(() => {
-    if (isEdit && student) {
-      setForm({ name: student.name || "", class: student.class || "" });
-    } else {
-      setForm({ name: "", class: "" });
-    }
+    setForm(
+      isEdit
+        ? { name: student.name || "", class: student.class || "" }
+        : { name: "", class: "" }
+    );
   }, [open, isEdit, student]);
 
-  /* -------- aksi ------------- */
   const handleSave = async () => {
+    setLoading(true);
     try {
-      if (isEdit) {
-        await axios.put(`/api/students/${student.id}`, form);
-      } else {
-        await axios.post("/api/students", form);
-      }
+      const url = isEdit ? `/api/students/${student.id}` : "/api/students";
+      const method = isEdit ? axios.put : axios.post;
+      await method(url, form);
       onSuccess?.();
       onOpenChange(false);
     } catch (err) {
-      console.error("❌ Gagal simpan siswa:", err);
+      console.error("❌ Gagal simpan:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleDelete = async () => {
-    if (!isEdit) return;
-    if (!confirm(`Hapus siswa ${student.name}?`)) return;
+    if (!isEdit || !confirm(`Hapus siswa ${student.name}?`)) return;
+    setLoading(true);
     try {
       await axios.delete(`/api/students/${student.id}`);
       onSuccess?.();
       onOpenChange(false);
     } catch (err) {
-      console.error("❌ Gagal hapus siswa:", err);
+      console.error("❌ Gagal hapus:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  /* -------- UI ------------- */
+  const safeOpenChange = (val) => !loading && onOpenChange(val);
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={safeOpenChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{isEdit ? "Edit Siswa" : "Tambah Siswa"}</DialogTitle>
         </DialogHeader>
         <DialogDescription />
-
         <div className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <Label>Nama</Label>
-            <Input
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              placeholder="isi nama siswa..."
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label>Kelas</Label>
-            <Input
-              value={form.class}
-              onChange={(e) => setForm({ ...form, class: e.target.value })}
-              placeholder="isi kelas..."
-            />
-          </div>
+          {["name", "class"].map((field) => (
+            <div key={field} className="grid gap-2">
+              <Label>{field === "name" ? "Nama" : "Kelas"}</Label>
+              <Input
+                value={form[field]}
+                onChange={(e) => setForm({ ...form, [field]: e.target.value })}
+                placeholder={`isi ${
+                  field === "name" ? "nama siswa" : "kelas"
+                }...`}
+                disabled={loading}
+              />
+            </div>
+          ))}
         </div>
-
         <DialogFooter className="flex gap-2">
           {isEdit && (
-            <Button variant="destructive" onClick={handleDelete}>
-              Hapus
+            <Button
+              variant="destructive"
+              onClick={handleDelete}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Hapus...
+                </>
+              ) : (
+                "Hapus"
+              )}
             </Button>
           )}
-          <Button onClick={handleSave}>{isEdit ? "Perbarui" : "Simpan"}</Button>
+          <Button onClick={handleSave} disabled={loading}>
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
+                {isEdit ? "Memperbarui..." : "Menyimpan..."}
+              </>
+            ) : isEdit ? (
+              "Perbarui"
+            ) : (
+              "Simpan"
+            )}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
