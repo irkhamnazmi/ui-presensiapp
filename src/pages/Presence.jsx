@@ -40,7 +40,9 @@ export default function Presence() {
 
   const fetchPresence = async () => {
     try {
-      const res = await axios.get("/api/presences");
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/presences`
+      );
       setData(res.data);
     } catch (err) {
       console.error("Gagal mengambil data presensi", err);
@@ -54,7 +56,7 @@ export default function Presence() {
 
   const handleSave = async (id) => {
     try {
-      await axios.post("/api/presences", {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/presences`, {
         student_id: id,
       });
       fetchPresence();

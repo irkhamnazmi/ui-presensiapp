@@ -35,7 +35,9 @@ export default function StudentDialog({
   const handleSave = async () => {
     setLoading(true);
     try {
-      const url = isEdit ? `/api/students/${student.id}` : "/api/students";
+      const url = isEdit
+        ? `${import.meta.env.VITE_API_URL}/api/students/${student.id}`
+        : `${import.meta.env.VITE_API_URL}/api/students`;
       const method = isEdit ? axios.put : axios.post;
       await method(url, form);
       onSuccess?.();
@@ -51,7 +53,9 @@ export default function StudentDialog({
     if (!isEdit || !confirm(`Hapus siswa ${student.name}?`)) return;
     setLoading(true);
     try {
-      await axios.delete(`/api/students/${student.id}`);
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/students/${student.id}`
+      );
       onSuccess?.();
       onOpenChange(false);
     } catch (err) {

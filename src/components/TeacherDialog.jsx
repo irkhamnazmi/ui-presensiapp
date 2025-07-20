@@ -57,8 +57,11 @@ export default function TeacherDialog({
     setLoading(true);
     try {
       const req = isEdit
-        ? axios.put(`/api/teachers/${teacher.id}`, form)
-        : axios.post("/api/teachers", form);
+        ? axios.put(
+            `${import.meta.env.VITE_API_URL}/api/teachers/${teacher.id}`,
+            form
+          )
+        : axios.post(`${import.meta.env.VITE_API_URL}/api/teachers`, form);
       await req;
       onSuccess?.();
       onOpenChange(false);
@@ -73,7 +76,9 @@ export default function TeacherDialog({
     if (!isEdit || !confirm(`Hapus guru ${teacher.name}?`)) return;
     setLoading(true);
     try {
-      await axios.delete(`/api/teachers/${teacher.id}`);
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/teachers/${teacher.id}`
+      );
       onSuccess?.();
       onOpenChange(false);
     } catch (err) {

@@ -19,10 +19,13 @@ const Login = () => {
     setError("");
 
     try {
-      const res = await axios.post("/api/login", {
-        email: form.email,
-        password: form.password,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/login`,
+        {
+          email: form.email,
+          password: form.password,
+        }
+      );
 
       localStorage.setItem("user", JSON.stringify(res.data.user));
       window.location.href = "/"; // redirect

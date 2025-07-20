@@ -64,7 +64,9 @@ export default function Users() {
 
   const fetchStudents = async () => {
     try {
-      const res = await axios.get("/api/students");
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/students`
+      );
       setData(res.data);
     } catch (err) {
       console.error("Gagal fetch siswa:", err);
@@ -73,7 +75,9 @@ export default function Users() {
 
   const fetchTeachers = async () => {
     try {
-      const res = await axios.get("/api/teachers");
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/teachers`
+      );
       setDataTeacher(res.data);
     } catch (err) {
       console.error("Gagal fetch guru:", err);
