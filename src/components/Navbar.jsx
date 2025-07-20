@@ -68,7 +68,7 @@ export default function Navbar() {
               className="text-red-600"
               onClick={() => {
                 localStorage.removeItem("user");
-                window.location.href = "/login";
+                window.location.href = "/";
               }}
             >
               Logout
