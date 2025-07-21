@@ -2,7 +2,6 @@
 import { useLocation } from "wouter";
 import Navbar from "./Navbar";
 import BottomNav from "./BottomNavbar";
-import { Helmet } from "react-helmet";
 
 export default function Layout({ children }) {
   const [location] = useLocation();
