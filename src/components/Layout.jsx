@@ -2,6 +2,7 @@
 import { useLocation } from "wouter";
 import Navbar from "./Navbar";
 import BottomNav from "./BottomNavbar";
+import { Helmet } from "react-helmet";
 
 export default function Layout({ children }) {
   const [location] = useLocation();
@@ -12,15 +13,45 @@ export default function Layout({ children }) {
     !location.startsWith("/login") && !location.startsWith("/404");
 
   return (
-    <div className="min-h-screen bg-white px-16">
-      {/* Navbar */}
-      {shouldShowNav && <Navbar />}
+    <>
+      <Helmet>
+        <title>PresensiApp | Aplikasi Kehadiran</title>
+        <meta
+          name="description"
+          content="PresensiApp adalah aplikasi pengelola presensi sederhana."
+        />
+        <meta property="og:title" content="PresensiApp | Aplikasi Kehadiran" />
+        <meta
+          property="og:description"
+          content="PresensiApp adalah aplikasi pengelola presensi sederhana."
+        />
+        <meta
+          property="og:image"
+          content="https://presensiapp.netlify.app/images/presensiapp.png"
+        />
+        <meta property="og:url" content="https://presensiapp.netlify.app/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="PresensiApp | Aplikasi Kehadiran" />
+        <meta
+          name="twitter:description"
+          content="PresensiApp adalah aplikasi pengelola presensi sederhana."
+        />
+        <meta
+          name="twitter:image"
+          content="https://presensiapp.netlify.app/images/presensiapp.png"
+        />
+      </Helmet>
 
-      {/* Main */}
-      <main className="border-slate-500">{children}</main>
+      <div className="min-h-screen bg-white px-16">
+        {/* Navbar */}
+        {shouldShowNav && <Navbar />}
 
-      {/* Bottom Navigation */}
-      {shouldShowBottomNav && <BottomNav />}
-    </div>
+        {/* Main */}
+        <main className="border-slate-500">{children}</main>
+
+        {/* Bottom Navigation */}
+        {shouldShowBottomNav && <BottomNav />}
+      </div>
+    </>
   );
 }
